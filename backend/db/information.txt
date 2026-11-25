@@ -1,0 +1,51 @@
+数据库使用sqlite
+
+
+
+数据表：
+1.会话表sessions
+2.内容块表blocks
+3.消息表messages
+
+
+
+1.会话表sessions
+属性定义表：
+字段		类型		约束						说明
+id			INTEGER		PRIMARY KEY, AUTOINCREMENT	主键
+title		TEXT		NOT NULL					会话标题
+model		TEXT		NOT NULL					会话使用的模型
+created_at	INTEGER		NOT NULL					会话创建时间
+updated_at	INTEGER		NOT NULL					会话更新时间
+
+
+
+2.内容块表blocks
+字段		类型		约束						说明
+id			INTEGER		PRIMARY KEY, AUTOINCREMENT	主键
+session_id	INTEGER		NOT NULL, REFERENCE			内容块属于哪个会话，详细见注
+title		TEXT		NOT NULL					内容块标题
+content		TEXT		NOT NULL					内容块内容
+selected	INTEGER		NOT NULL, DEFAULT 1			该内容块是否被选中
+position	INTEGER		NOT NULL					内容块编号，详细见注
+created_at	INTEGER		NOT NULL					内容块创建时间
+updated_at	INTEGER		NOT NULL					内容块更新时间
+注：session_id关联sessions表的id(外键)
+	当session表的一行被删除时，blocks表的session_id与session表的id相同的信息被自动删除
+注：sqlite没有原生布尔，这里用1表示true；用0表示false
+注：position为内容块的编号(内容块、内容块2···)
+	属于同一个session的内容块中会出现编号重复的情况(session_id相同的信息中，position也可能相同)
+	因为会话进行很多轮，内容块也会被提交很多轮，重复很正常
+	排序时应该先按照position排序，相同时再按照updated_at排序
+
+
+
+3.消息表messages
+字段		类型		约束						说明
+id			INTEGER		PRIMARY KEY, AUTOINCREMENT	主键
+session_id	INTEGER		NOT NULL, REFERENCES		消息属于哪个会话，详细见注
+role		TEXT		NOT NULL					发消息的角色
+content		TEXT		NOT NULL					消息内容
+created_at	INTEGER		NOT NULL					消息创建时间
+注：session_id关联sessions表的id(外键)
+	当session表的一行被删除时，blocks表的session_id与session表的id相同的信息被自动删除

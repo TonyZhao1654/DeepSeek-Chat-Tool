@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8" />
+	<title>DeepSeek工作台</title>
+	<link rel="icon" href="data:," />
+	<script src="https://gcore.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<link rel="stylesheet" href="css/base.css" />
+	<link rel="stylesheet" href="css/contents.css" />
+	<link rel="stylesheet" href="css/chat.css" />
+</head>
+<body>
+	<div class="header">
+		<div class="header-left">
+			<h2 style="margin: 0;">DeepSeek工作台</h2>
+			<select id="model-select" class="model-select">
+				<option value="deepseek-chat">加载中</option>
+			</select>
+			<select id="session-select" class="model-select"></select>
+			<input type="text" id="session-title" class="session-title" placeholder="会话标题" />
+			<button id="new-session-button" class="button-small button-ghost">新建会话</button>
+			<button id="delete-session-button" class="button-small button-ghost">删除会话</button>
+		</div>
+		<div class="balance">余额: <span id="balance-value">加载中</span> 元</div>
+	</div>
+	<div class="container">
+		<div class="panel">
+			<div class="panel-head">
+				<h3>内容块（勾选后注入对话）</h3>
+				<button id="add-content-button" class="button-small">新增内容块</button>
+			</div>
+			<div id="contents"></div>
+		</div>
+		<div class="panel">
+			<div id="chat-error" class="error-banner" hidden></div>
+			<div id="chat"></div>
+			<div class="input-area">
+				<textarea id="input" placeholder="输入对话内容... (Enter 发送, Shift+Enter 换行)"></textarea>
+				<button id="send-button">发送</button>
+			</div>
+		</div>
+	</div>
+	<script type="module" src="js/main.js"></script>
+</body>
+</html>

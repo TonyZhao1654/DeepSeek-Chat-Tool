@@ -1,0 +1,12 @@
+export const chatElement = document.getElementById("chat");
+export const inputElement = document.getElementById("input");
+export const sendButton = document.getElementById("send-button");
+export const modelSelect = document.getElementById("model-select");
+export const balanceValue = document.getElementById("balance-value");
+export const sessionSelect = document.getElementById("session-select");
+export const sessionTitle = document.getElementById("session-title");
+export const addContentButton = document.getElementById("add-content-button");
+export const newSessionButton = document.getElementById("new-session-button");
+export const deleteSessionButton = document.getElementById("delete-session-button");
+export const contentsElement = document.getElementById("contents");
+export const errorBanner = document.getElementById("chat-error");
